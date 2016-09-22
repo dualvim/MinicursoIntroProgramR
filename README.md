@@ -1,5 +1,6 @@
-# MinicursoIntroProgramR
-Códigos e arquivos usados nas aulas do minicurso "Introdução ao Software R", ministrado por Eduardo Alvim na FACIC-UFU  
+# Minicurso de Introdução à Programação em R
+
+## Repositórico com os códigos e arquivos usados nas aulas do minicurso "Introdução ao Software R", ministrado por Eduardo Alvim na FACIC-UFU  
   
  - Aula 1 (24/08/2016) - Conteúdo Geral  
 	- Operações Matemáticas no R  
