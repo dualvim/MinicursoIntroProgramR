@@ -37,14 +37,19 @@ class(dados)
 names(dados)
 # Ver o número de observações e de variáveis em "dados"
 dim(dados)
+dim(dados)[1]# Número de linhas
+dim(dados)[2]# Número de colunas
+
 # Ver as 5 primeiras observações em "dados"
 head(dados, n = 5)
 # Ver as 5 últimas observações em "dados"
 tail(dados, n = 5)
+
 # Espaço em memória ocupado pelo objeto "dados"
 object.size(dados) #em bytes
 print(object.size(dados), units="Kb") # em Kb
 print(object.size(dados), units="Mb") # em Mb
+print(object.size(dados), units="Gb") # em Gb
 
 
 
@@ -55,14 +60,21 @@ print(object.size(dados), units="Mb") # em Mb
 ######################################
 # Verificar o tipo de variável na coluna 'genhealth' de 'dados':
 class(dados$genhlth) # "factor"
+class(dados$weight)
 
 # Contar a frequência de cada tipo de estado de saúde em 'genhlth':
 table(dados$genhlth)
+table(dados$genhlth)[3]
+
 #Alternativamente:
-summary(dados$genhlth)
+summary(dados$genhlth) #Retorna as frequencias de cada fator
+summary(dados$weight) #Retorna os valores de cada quartil 
+
 
 # Frequência relativa de cada estado de saúde:
 table(dados$genhlth)/length(dados$genhlth)
+paste0((table(dados$genhlth)/20000)*100,"%")
+
 
 # Frequência de fumantes nos dados
 table(dados$smoke100)
@@ -80,17 +92,22 @@ table(dados$genhlth, dados$smoke100)
 
 
 
-
 #################################################
 # 4 - Gráficos com as variáveis qualitativas    #
 #################################################
 # Gráfico de barras com as freqências de cda estado de saúde:
 barplot(table(dados$genhlth), main ="Estados de saúde")
+
 # Gráfico de barras com as frequências de cada sexo na amostra:
 barplot(table(dados$gender), main ="Gênero")
+barplot(table(dados$gender), main ="Gênero", col="red")
+barplot(table(dados$gender), main ="Gênero", col=c("red", "blue"))
+
+
 
 # Gráficos de proporções:
 tabSaudeFum <- table(dados$genhlth, dados$smoke100)
+
 # Gráfico de proporções referentes a tabela acima
 mosaicplot(tabSaudeFum, 
            main = "Saude Vs Fumar",
@@ -104,6 +121,7 @@ mosaicplot(tabFumGen, main = "Gênero Vs. Fumantes", xlab = "Sexo", ylab="Fumante
 
 
 
+
 ########################################################
 # 5 - estatísticas Descritivas  de dados quantitativos #
 ########################################################
@@ -111,11 +129,12 @@ mosaicplot(tabFumGen, main = "Gênero Vs. Fumantes", xlab = "Sexo", ylab="Fumante
 # --> Argumento "na.rm=TRUE": Não leva em conta as observações faltantes (caso hajam) no cálculo
 # Média:
 mean(dados$height, na.rm=TRUE)
-mean(dados[,5], na.rm=TRUE)
+mean(dados[1:3,5], na.rm=TRUE) #Média dos 3 primeiros elementos da coluna height de dados
 # Desvio-Padrão:
 sd(dados$height, na.rm=TRUE)
 # Mediana:
 median(dados$height, na.rm=TRUE)
+
 # Quartis, média e mediana
 summary(dados$height)
 quantile(dados$height, na.rm=TRUE)
@@ -133,6 +152,7 @@ quantile(dados$height, probs=seq(from=0, to = 1, by = 0.1), na.rm=TRUE)
 #     sapply(<conjunto_de_dados>, <função_aplicada>)
 #
 sapply(dados[, c(5,6,7,8)], mean) #Formato Vetor com os indeces numerados
+sapply(dados[, c(5,6,7,8)], sd)
 sapply(dados[, c(5,6,7,8)], sd, simplify=FALSE) #Formato Lista
 
 # --> Caspo queiramos realizar uma determinada operação para cada nível de uma variável do tipo fator,
@@ -142,7 +162,7 @@ sapply(dados[, c(5,6,7,8)], sd, simplify=FALSE) #Formato Lista
 #
 # --> Retornar o peso médio em libras (weight) referente a cada grupo de 'genhealth'
 tapply(dados$weight, dados$genhlth, mean)
-
+tapply(dados$weight, dados$smoke100, mean) #Peso médio de fumantes e não fumantes
 
 
 
@@ -152,8 +172,8 @@ tapply(dados$weight, dados$genhlth, mean)
 # histograma:
 hist(dados$weight, main = "Histograma Peso", xlab="Peso (em lb)")
 
-# Histograma com 60 "barras" verticais
-hist(dados$weight, breaks= 60, main = "Histograma Peso", xlab="Peso (em lb)")
+# Histograma com 100 "barras" verticais
+hist(dados$weight, breaks = 100, main = "Histograma Peso", xlab="Peso (em lb)")
 # Adicionar ao histograma a concentração das observações
 rug(dados$weight, col="red")
 
