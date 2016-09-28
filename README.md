@@ -25,3 +25,11 @@
 		- Gráfico de dispersão  
 		- Funções definidas pelo usuário  
   
+  - **Aula 3 - 28/09/2016 - Importação de dados e Revisão de Métodos Quantitativos 1**  
+	- Comandos de diretório de trabalho - getwd() e setwd()  
+	- Importação de um conjunto de dados salvo no computador  
+	- Estatísticas descritivas de dados qualitativos  
+	- Gráficos de variáveis qualitativas  
+	- Estatísticas descritivas de dados quantitativos  
+	- Funções sapply() e tapply()  
+	- Gráficos de dados quantitativos  
