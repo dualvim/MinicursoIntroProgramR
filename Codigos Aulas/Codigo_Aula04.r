@@ -26,10 +26,11 @@ names(dados)
 # [5] "cnpj"                  "data_registro"         "data_constituicao"     "data_cancelamento"    
 # [9] "motivo_cancelamento"   "situacao_registro"  
 
+#dados$denominacao_social <- tolower(dados$denominacao_social)
+#grep(" AÇO ", dados$denominacao_social, value=TRUE)
 
 # --> Voltar para maiúsculo:
 #names(dados) <- toupper(names(dados))
-
 
 
 # --> Ver o tipo de dados de cada coluna:
@@ -66,8 +67,8 @@ sapply(dados, class)
 
 # --> Ver o dia da semana que cada empresa foi registrada:
 diaSemReg <- weekdays(dados$data_registro)
-head(diaSemReg)
-
+head(diaSemReg, n=12)
+tail(diaSemReg)
 
 # --> Adicionar a coluna com os dias da semana ao conjunto de dados "dados"
 dados <- cbind(dados[,1:6], diaSemReg, dados[,7:dim(dados)[2]])
@@ -76,6 +77,7 @@ dados <- cbind(dados[,1:6], diaSemReg, dados[,7:dim(dados)[2]])
 
 # --> Colocar as observações do nosso conjunto de dados em ordem crescente de "codigo_cvm"
 dados <- dados[order(dados$codigo_cvm, decreasing=FALSE), ]
+dados <- dados[order(dados$data_registro, decreasing=FALSE), ]
 # Veja que as observações estão em uma ordem diferente da que estava
 
 
@@ -119,6 +121,15 @@ dados$cnpj <- sapply(dados$cnpj, formataCNPJ)
 
 
 
+funSimples <- function(x){
+      x <- x + 1
+      return(x)
+}
+funSimples(3)
+
+
+
+
 
 
 ##########################################
@@ -136,12 +147,14 @@ valorFuturo <- function(vlrPres, tx_aa, dias){
 }
 dias <- 110:115
 valorFuturo(1000,0.12,dias)
+valorFuturo(1000,0.12,170)
 
 # Plotar gráfico com o rendimento de uma aplicação financeira
 # VP = 1000; juros = 12% a.a.; período: 0 a 5000 dias úteis
 dias <- seq(from = 0, to = 5000, by = 100) 
 vlrFuturos <- valorFuturo(1000,0.12,dias)
-plot(dias, vlrFuturos,
+
+plot(x=dias, y=vlrFuturos,
      type = "l",
      col = "green",
      main = "VP = 1000, i = 12% a.a.",
@@ -163,7 +176,7 @@ plot(dias, vlrFuturos,
      xlim = c(0, 5000))
 
 lines(dias, vlrFuturos2, col = "red")
-lines(dias, vlrFuturos3, col = "blue")
+points(dias, vlrFuturos3, col = "blue")
 
 # Legenda:
 legend("topleft", lty= "solid", col=c("red", "green", "blue"), legend=c("6% a.a.", "12% a.a.", "18% a.a."))
