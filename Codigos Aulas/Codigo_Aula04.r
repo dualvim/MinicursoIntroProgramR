@@ -121,12 +121,16 @@ dados$cnpj <- sapply(dados$cnpj, formataCNPJ)
 
 
 
+
+##################################################################
+# Ilustação rápida para explicar o funcionamento de uma função   # 
+##################################################################
 funSimples <- function(x){
       x <- x + 1
       return(x)
 }
-funSimples(3)
-
+funSimples(3) #[1] 4
+funSimples(20) #[1] 21
 
 
 
@@ -142,7 +146,7 @@ funSimples(3)
 #   <Atividades a serem realizadas>
 # }
 valorFuturo <- function(vlrPres, tx_aa, dias){
-      vf <- vlrPres*((1+tx_aa)^(dias/252))
+      vf <- vlrPres*((1+tx_aa)^(dias/360))
       return(vf)
 }
 dias <- 110:115
