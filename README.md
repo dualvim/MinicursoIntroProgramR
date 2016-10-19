@@ -59,7 +59,7 @@
 		- Calcular intervalos de confiança  
 		- Usar o comando tapply()
 		- Usar o comando tapply() para calcular o intervalo de confiança para vários grupos.  
-	- Extra_GraficosLattice.r  
+	- **Extra_GraficosLattice.r**  
 		- Baixar um arquivo da internet – download.file()  
 		- Estatisticas descritivas – summary(), sapply()  
 		- Formatar uma data para encontrar o ano  
@@ -68,7 +68,7 @@
 			- Comando dotplot()  
 			- Comando histogram()  
 			- Comando bwplot()  
-	- Extra_MatFin.r  
+	- **Extra_MatFin.r**  
 		- Baixar um arquivo da internet – download.file()  
 		- Estatisticas descritivas – summary(), sapply()  
 		- Extrair um subconjunto de dados de um conjunto de dados  
@@ -86,7 +86,7 @@
 		- Um pouco de regressão  
 		- Utilização de gráficos do pacote ‘base’ do R  
 		- Gráfico de resíduos da regressão  
-	- Extra_MatFin2.r  
+	- **Extra_MatFin2.r**  
 		- Calcular taxa efetiva ao ano – ear()  
 		- Calcular o valor futuro – fv()  
 		- Calcular a taxa de desconto – discout.rate()  
